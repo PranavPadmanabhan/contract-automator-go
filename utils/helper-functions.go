@@ -16,7 +16,6 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/joho/godotenv"
 )
 
 type Data struct {
@@ -25,10 +24,6 @@ type Data struct {
 }
 
 func Automate() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
 	RPC_URL := constants.RPC_URL
 	fmt.Println("Automation Initiating..")
 	client, err := ethclient.DialContext(context.Background(), RPC_URL)
