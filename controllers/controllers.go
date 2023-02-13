@@ -4,11 +4,10 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
 
+	"automator/constants"
 	"automator/models"
 
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -20,11 +19,7 @@ const CollectionName = "Tasks"
 var collection *mongo.Collection
 
 func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	mongo_uri := os.Getenv("MONGO_URL")
+	mongo_uri := constants.MONGO_URL
 	clientOption := options.Client().ApplyURI(mongo_uri)
 	client, err := mongo.Connect(context.TODO(), clientOption)
 	if err != nil {

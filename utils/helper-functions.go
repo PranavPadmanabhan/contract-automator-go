@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"automator/constants"
 	"automator/contracts/solmate"
 	"automator/contracts/web3"
 	"automator/controllers"
@@ -9,7 +10,6 @@ import (
 	"fmt"
 	"log"
 	"math/big"
-	"os"
 	"time"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -29,7 +29,7 @@ func Automate() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	RPC_URL := os.Getenv("RPC_URL")
+	RPC_URL := constants.RPC_URL
 	fmt.Println("Automation Initiating..")
 	client, err := ethclient.DialContext(context.Background(), RPC_URL)
 	if err != nil {
@@ -111,12 +111,8 @@ func execute(client *ethclient.Client, address common.Address, abi string, priva
 }
 
 func getTasks(client *ethclient.Client) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
-	key := os.Getenv("KEY_ENCRYPTED")
-	contractAddress := os.Getenv("CONTRACT_ADDRESS_ENCRYPTED")
+	key := constants.KEY_ENCRYPTED
+	contractAddress := constants.CONTRACT_ADDRESS_ENCRYPTED
 	privateKey, err := crypto.HexToECDSA(key)
 	if err != nil {
 		log.Fatal(err)
