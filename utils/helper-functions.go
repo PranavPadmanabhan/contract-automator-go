@@ -30,7 +30,7 @@ func Automate() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(30 * time.Second)
 	<-ticker.C
 	getTasks(client)
 	Automate()
